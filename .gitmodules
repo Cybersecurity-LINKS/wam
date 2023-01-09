@@ -1,0 +1,4 @@
+[submodule "iota.c"]
+	path = iota.c
+	url = https://github.com/iotaledger/iota.c.git
+	branch = dev
