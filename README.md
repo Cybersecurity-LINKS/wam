@@ -73,6 +73,7 @@ APACHE 2.0
 
 # Authors
 Alberto C. --> [@alby0x0c](github.com/alby0x0c)
-Cybersecurity Group of [LINKS Foundation](https://linksfoundation.com/)
+
+Cybersecurity Research Group at [LINKS Foundation](https://linksfoundation.com/)
 
 
