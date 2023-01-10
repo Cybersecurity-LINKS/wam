@@ -1,5 +1,5 @@
-WAM - Wrapped Authenticated Message
-===================================
+WAM - Wrapped Authenticated Messages
+====================================
 
 WAM is a library to interface with IOTA Tangle.
 It can be used to write and read raw data from the Chrysalis version of IOTA Tangle.
