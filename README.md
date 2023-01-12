@@ -27,7 +27,8 @@ You need to install the dependencies for `iota.c`:
 
 # Build
 - Clone this repository and its submodules (i.e., `iota.c`)
-`git clone --recurse-submodules https://github.com/Cybersecurity-LINKS/WAM/WAM.git`
+
+`git clone --recurse-submodules https://github.com/Cybersecurity-LINKS/WAM.git`
 
 - Build the library
   ```bash
