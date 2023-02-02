@@ -1,0 +1,79 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fe5edf3..6375266 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -54,6 +54,9 @@ endif()
+ 
+ if(WITH_IOTA_CLIENT)
+ include(cmake/cjson.cmake)
++##########################################################################################
++include(cmake/curl.cmake)
++##########################################################################################
+ endif()
+ 
+ if(WITH_IOTA_CORE)
+@@ -122,9 +125,11 @@ if(IOTA_ASAN_ENABLED)
+   endif()
+ endif()
+ 
+-if(WITH_IOTA_CLIENT)
+-  find_package(CURL REQUIRED)
+-endif()
++##########################################################################################
++# if(WITH_IOTA_CLIENT)
++#   find_package(CURL REQUIRED)
++# endif()
++##########################################################################################
+ 
+ # links libraries in the sandbox
+ link_directories("${CMAKE_INSTALL_PREFIX}/lib")
+diff --git a/cmake/sodium.cmake b/cmake/sodium.cmake
+index cd86d63..8c496c0 100644
+--- a/cmake/sodium.cmake
++++ b/cmake/sodium.cmake
+@@ -16,7 +16,7 @@ if (NOT __SODIUM_INCLUDED)
+     URL https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz
+     # URL_HASH SHA256=2ef4304dd844e274d78dfcf0201e1ba1a312eaba135bdc8affc56a3d80b58593
+     BUILD_IN_SOURCE TRUE
+-    CONFIGURE_COMMAND ${sodium_src_dir}/configure --prefix=${CMAKE_INSTALL_PREFIX} --disable-shared CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER}
++    CONFIGURE_COMMAND ${sodium_src_dir}/configure --prefix=${CMAKE_INSTALL_PREFIX} --disable-shared CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} --host=riscv64-unknown-linux-gnu
+     # BUILD_COMMAND make
+     # INSTALL_COMMAND ""
+     # for debug
+diff --git a/src/client/CMakeLists.txt b/src/client/CMakeLists.txt
+index a5a829b..5549fd5 100644
+--- a/src/client/CMakeLists.txt
++++ b/src/client/CMakeLists.txt
+@@ -68,16 +68,20 @@ if(MQTT_CLIENT_ENABLE)
+ endif()
+ 
+ target_include_directories(
+-  iota_client PUBLIC "${PROJECT_SOURCE_DIR}/src" "${CURL_INCLUDE_DIRS}"
+-                     "${CMAKE_INSTALL_PREFIX}/include/cjson" # for esp32 compatibility
++  iota_client PUBLIC "${PROJECT_SOURCE_DIR}/src" 
++                      "${CMAKE_INSTALL_PREFIX}/include/curl" # "${CURL_INCLUDE_DIRS}"
++                      "${CMAKE_INSTALL_PREFIX}/include/cjson" # for esp32 compatibility
++                      # "${OPENSSL_INCLUDE_DIR}/openssl" 
+ )
+ 
+-add_dependencies(iota_client iota_core ext_cjson)
++add_dependencies(iota_client iota_core ext_cjson curl ext_OpenSSL)
+ 
+ target_link_libraries(
+   iota_client
+-  INTERFACE ${CURL_LIBRARIES} cjson
+-  PUBLIC iota_core)
++  INTERFACE cjson curl dl# ${CURL_LIBRARIES} 
++  PUBLIC iota_core
++  INTERFACE ${OPENSSL_INSTALL_DIR}/lib/libssl.a ${OPENSSL_INSTALL_DIR}/lib/libcrypto.a
++)
+ 
+ if(MQTT_CLIENT_ENABLE)
+   target_link_libraries(iota_client PRIVATE Threads::Threads)
+@@ -91,4 +95,4 @@ install(
+   DIRECTORY "${PROJECT_SOURCE_DIR}/src/client/"
+   DESTINATION "${CMAKE_INSTALL_PREFIX}/include/client"
+   FILES_MATCHING
+-  PATTERN "*.h")
++  PATTERN "*.h")
+\ No newline at end of file

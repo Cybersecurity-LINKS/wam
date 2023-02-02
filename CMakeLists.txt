@@ -8,6 +8,13 @@ link_directories( "${CMAKE_INSTALL_PREFIX}/lib"
 				  "${CMAKE_INSTALL_PREFIX}/iota.c/src/crypto" )
 add_library(WAM "WAM.c")
 
+if(RISCV)
+	message(STATUS "Compiling for riscv64")
+	include(macros.cmake)
+	# include($ENV{KEYSTONE_SDK_DIR}/cmake/macros.cmake)
+	set(BITS 64)
+	use_riscv_toolchain(${BITS})
+endif()
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/iota.c")
 target_include_directories( WAM PUBLIC 
