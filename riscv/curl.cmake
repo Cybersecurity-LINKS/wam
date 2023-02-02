@@ -50,7 +50,7 @@ if (NOT __CURL_INCLUDED)
             --prefix=${CMAKE_INSTALL_PREFIX}  
             --host=riscv64-unknown-linux-gnu 
             --disable-pthreads 
-            --with-ssl=/home/ubuntu18/buildOpenSSL 
+            --with-ssl=${OPENSSL_INSTALL_DIR}
             --disable-threaded-resolver 
             --disable-shared 
             CC=${CMAKE_C_COMPILER} 

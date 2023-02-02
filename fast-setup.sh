@@ -9,10 +9,6 @@ echo "Starting..."
 #git submodule update --init --recursive
 echo "Building project"
 
-
-sudo rm -rf build
-mkdir build && cd ./build #here we can pass an argument and if not set, use "build"
-
 if [ "$1" = "--riscv" ]; then
     echo "Building for RISCV..."
     if ( $(command -v riscv64-unknown-linux-gnu-gcc > /dev/null) && $(command -v riscv64-unknown-elf-gcc > /dev/null) )
@@ -30,6 +26,8 @@ if [ "$1" = "--riscv" ]; then
     fi
 fi
 
+sudo rm -rf build
+mkdir build && cd ./build #here we can pass an argument and if not set, use "build"
 cmake $SDK_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD -DCryptoUse=libsodium ..
 make
 
