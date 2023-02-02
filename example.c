@@ -27,6 +27,7 @@ void WAM_example_write_read() {
 							 .tls = true};
 
 	// Write
+	fprintf(stdout, "WAM_write ...\n");
 	WAM_init_channel(&ch_send, 1, &testnet0tls, &k, &a);
 	WAM_write(&ch_send, my_msg, 6, false);
 	fprintf(stdout, "[CH-id=%d] Messages sent: %d (%d bytes)\n", ch_send.id, ch_send.sent_msg, ch_send.sent_bytes);
