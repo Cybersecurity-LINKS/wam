@@ -2,7 +2,7 @@ WAM - Wrapped Authenticated Messages
 ====================================
 
 WAM is a library to interface with IOTA Tangle.
-It can be used to write and read raw data from the Chrysalis version of IOTA Tangle.
+It can be used to write and read raw data from the _Chrysalis_ version of IOTA Tangle.
 
 You can write data on the Tangle as zero-value transaction. However the data is public and can be read by anybody.
 WAM protect the data with symmetric encryption and digital signature.
@@ -16,6 +16,9 @@ Moreover it enables to store data of arbitrary size by linking chunks of data ac
 
 - Authentication: you can pass a custom key to create a digital signature (Ed25519) for your data.
 
+# Target Architecture 
+- x86_64
+- riscv64 (look at the README.md in the riscv folder)
 
 # Requirements
 You need to install the dependencies for `iota.c`:
@@ -27,9 +30,9 @@ You need to install the dependencies for `iota.c`:
 
 # Build
 - Clone this repository and its submodules (i.e., `iota.c`)
-
-`git clone --recurse-submodules https://github.com/Cybersecurity-LINKS/WAM.git`
-
+  ```bash
+  git clone --recurse-submodules https://github.com/Cybersecurity-LINKS/WAM.git
+  ```
 - Build the library
   ```bash
   mkdir build && cd ./build
@@ -73,7 +76,7 @@ APACHE 2.0
 
 
 # Authors
-Alberto C. --> [@alby0x0c](github.com/alby0x0c)
+Alberto C. --> [@alby0x0c](https://github.com/alby0x0c)
 
 Cybersecurity Research Group at [LINKS Foundation](https://linksfoundation.com/)
 

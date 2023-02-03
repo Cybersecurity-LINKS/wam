@@ -14,11 +14,16 @@ if [ "$1" = "--riscv" ]; then
     if ( $(command -v riscv64-unknown-linux-gnu-gcc > /dev/null) && $(command -v riscv64-unknown-elf-gcc > /dev/null) )
     then
         echo "RISCV tools are already installed"
-        cp ./riscv/curl.cmake ./iota.c/cmake/
-        cd iota.c
-        git apply ../riscv/iota.c_riscv.patch
-        # git apply -R iota.c_riscv.patch
-        cd .. 
+        if [ ! -f ./iota.c/cmake/curl.cmake ]; then
+            echo "Applying iota.c patch..."
+            cp ./riscv/curl.cmake ./iota.c/cmake/
+            cd iota.c
+            git apply ../riscv/iota.c_riscv.patch
+            # git apply -R iota.c_riscv.patch
+            cd .. 
+        else
+            echo "Patch for iota.c already installed"
+        fi        
         SDK_FLAGS="-DRISCV=y"
     else
         echo "Error: Read the guide and install a RISCV toolchain!"
@@ -27,7 +32,7 @@ if [ "$1" = "--riscv" ]; then
 fi
 
 sudo rm -rf build
-mkdir build && cd ./build #here we can pass an argument and if not set, use "build"
+mkdir build && cd ./build # here we can pass an argument and if not set, use "build"
 cmake $SDK_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD -DCryptoUse=libsodium ..
 make
 
