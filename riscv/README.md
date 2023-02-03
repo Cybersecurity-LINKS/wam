@@ -20,6 +20,6 @@ cd  <keystone build folder>
 make image
 ```
 
-Ensure that the _ca-certificates_ package is enabled by setting `BR2_PACKAGE_CA_CERTIFICATES=y` in the _QEMU/buildroot_ configuration file, as the application requires a TLS connection with the IOTA node.
+Ensure that the _ca-certificates_ package is enabled by setting `BR2_PACKAGE_CA_CERTIFICATES=y` in the _buildroot_ configuration file (`keystone/conf/qemu_riscv64_virt_defconfig`), as the application requires a TLS connection with the IOTA node.
 
 Before executing `./ExampleWAM`, set the correct time on the Linux buildroot system with `date -s "2023-02-02"` to ensure a successful TLS handshake with the IOTA node.
