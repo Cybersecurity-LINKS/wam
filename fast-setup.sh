@@ -31,7 +31,7 @@ if [ "$1" = "--riscv" ]; then
     fi
 fi
 
-sudo rm -rf build
+rm -rf build
 mkdir build && cd ./build # here we can pass an argument and if not set, use "build"
 cmake $SDK_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD -DCryptoUse=libsodium ..
 make
