@@ -30,4 +30,10 @@ set( APP_EXE ExampleWAM )
 add_executable( ${APP_EXE} "example.c" ) 
 target_link_libraries( ${APP_EXE} WAM )
 
+add_executable( WAM-demo-read "example-read.c" ) 
+target_link_libraries( WAM-demo-read WAM )
+
+add_executable( WAM-demo-write "example-write.c" ) 
+target_link_libraries( WAM-demo-write WAM )
+
 
