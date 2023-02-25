@@ -12,8 +12,8 @@
 
 
 
-void WAM_example_write(char* msg) {
-	uint8_t mykey[]="my_super_secret_key_for_encryption";
+void WAM_example_write() {
+	uint8_t mykey[]="supersecretkeyforencryption!!!!";
 	WAM_channel ch_send, ch_read;
 	WAM_AuthCtx a; a.type = AUTHS_NONE;
 	WAM_Key k; k.data = mykey; k.data_len = (uint16_t) strlen((char*)mykey);
@@ -27,10 +27,9 @@ void WAM_example_write(char* msg) {
 	WAM_init_channel(&ch_send, 1, &testnet0tls, &k, &a);
 	int i=0;
 	while (1) {
-		msg[strlen(msg)-1] = i%10 + '0';
-		fprintf(stdout, "\nWAM_write \"%s\"...\n", msg);
-		WAM_write(&ch_send, msg, strlen(msg), false);
-		fprintf(stdout, "[CH-id=%d] Messages sent: %d (%d bytes)\n", ch_send.id, ch_send.sent_msg, ch_send.sent_bytes);
+		sprintf(write_buff, "Hello SPIRS! (%.4d)", i);
+		fprintf(stdout, "\nWAM_write \"%s\"...\n", write_buff);
+		WAM_write(&ch_send, write_buff, strlen(write_buff), false);
 		i++;
 	}
 
@@ -38,12 +37,6 @@ void WAM_example_write(char* msg) {
 
 
 int main(int argc, char **argv) {
-
-	if (argc < 2) {
-		// no arguments were passed
-		printf("insert a message as argument");
-		exit(-1);
-    }
-	WAM_example_write(argv[1]);
+	WAM_example_write();
 	return 0;
 }

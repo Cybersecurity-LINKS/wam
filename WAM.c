@@ -517,8 +517,8 @@ uint8_t send_wam_message(WAM_channel* ch, uint8_t* raw_data, uint16_t raw_data_s
 	ret = send_indexation_msg(&iota_node, (char *) (ch->buff_hex_index), (char *) (ch->buff_hex_data), &response);
 	if(ret == 0) {
 		if (!response.is_error) {
-			fprintf(stdout, "Sent message - ID: %s\n", response.u.msg_id);
-			fprintf(stdout, "Sent message - index: %s\n", ch->buff_hex_index);
+			// fprintf(stdout, "Sent message - ID: %s\n", response.u.msg_id);
+			fprintf(stdout, " Sent message - index: %s\n", ch->buff_hex_index);
 			// print_raw_hex(ch->buff_hex_data, WAM_MSG_HEX_SIZE);
 			return(WAM_OK);
 		} else {
