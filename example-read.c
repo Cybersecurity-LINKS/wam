@@ -66,7 +66,7 @@ void WAM_example_read(char* str_index) {
 	while (1) {
 		ret = WAM_read(&ch_read, read_buff, &expected_size);
 		if ( ret != WAM_NOT_FOUND) {
-			fprintf(stdout, " bytes_read=%d\n", ch_read.recv_bytes);
+			// fprintf(stdout, " bytes_read=%d\n", ch_read.recv_bytes);
 			fprintf(stdout, " msg_read=%s\n\n", read_buff);
 
 	 	}	
