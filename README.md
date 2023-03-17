@@ -71,13 +71,3 @@ Everybody who wants to contribute is more than welcome.
 :)
 
 
-# License
-APACHE 2.0
-
-
-# Authors
-Alberto C. --> [@alby0x0c](https://github.com/alby0x0c)
-
-Cybersecurity Research Group at [LINKS Foundation](https://linksfoundation.com/)
-
-
